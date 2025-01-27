@@ -37,6 +37,14 @@ const OnboardingPage = () => {
         .then((response) => {
           console.log(response)
         })
+        .catch(() => {
+          const botMessage: any = {
+            role: "assistant",
+            content: 'Произошла ошибка, попробуйте еще раз',
+            time: new Date().toLocaleTimeString(),
+          };
+          setMsgs((prevMsgs) => [...prevMsgs, botMessage]);
+        })
         .finally(() => setIsLoading(false));
 
       // getChatAnswerV2(chatId, msg, chatKey).then((response) => {
