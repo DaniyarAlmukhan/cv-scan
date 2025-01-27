@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { CopyIcon, Send } from "assets";
 import Search from "components/search-chat/search-chat.component";
 import './onboarding.style.scss';
+import { getChatResponse } from "requests/onboarding.request";
 
 const OnboardingPage = () => {
   const [isChatOpen, setIsChatOpen] = React.useState<boolean>(false);
@@ -31,6 +32,12 @@ const OnboardingPage = () => {
       setIsLoading(true);
 
       // const chatKey = msg === internet_msg || msgs[0]?.content === internet_msg ? ChatKey.INTERNET : ChatKey.OTHERS;
+
+      getChatResponse(msg)
+        .then((response) => {
+          console.log(response)
+        })
+        .finally(() => setIsLoading(false));
 
       // getChatAnswerV2(chatId, msg, chatKey).then((response) => {
       //   const botMessage: IMessage = {
