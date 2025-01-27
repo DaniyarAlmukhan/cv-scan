@@ -77,6 +77,10 @@ const CandidatesPage = () => {
           setFilteredData(res.data.sort((a, b) => b.rating - a.rating))
           setTotalPages(Math.ceil(res.total / pageSize));
           setTotalItems(res.total);
+          setTabCounts({
+            candidates: res.total,
+            employees: 0,
+          });
         })
         .finally(() => {
           setTimeout(() => {
@@ -143,7 +147,7 @@ const CandidatesPage = () => {
               placeholder='Источник'
             />
 
-            <Select
+            {/* <Select
               name='vacancy'
               options={vacancies}
               style={{ width: '15rem' }}
@@ -153,7 +157,7 @@ const CandidatesPage = () => {
               placeholder='Вакансия'
               valueKey='value'
               labelKey='label'
-            />
+            /> */}
 
             <Input
               name='responseTime'

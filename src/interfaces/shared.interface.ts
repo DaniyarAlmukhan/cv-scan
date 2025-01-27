@@ -20,7 +20,7 @@ export interface IPageableResponse<T> {
 
 export interface IVacancy {
   vacancy_id: number;
-  name: string;
+  vacancy_name: string;
   region_id: number;
   address: string;
   views: number;
@@ -31,6 +31,7 @@ export interface IVacancy {
   region_name: string;
   manager: string;
   active?: boolean;
+
 }
 
 export type Route =

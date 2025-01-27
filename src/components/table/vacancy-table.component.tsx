@@ -105,7 +105,7 @@ const VacancyTable: FC<TableProps> = ({ data, selectedItems, setSelectedItems, o
                   onChange={() => handleSelectItem(row.vacancy_id)}
                 />
               </td>
-              <td>{row.name}</td>
+              <td>{row.vacancy_name}</td>
               <td>{row.region_name}</td>
               <td>
                 <div className="bubble">

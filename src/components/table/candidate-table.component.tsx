@@ -8,6 +8,7 @@ import { ChevronLeft, ChevronRight, SortIcon } from 'assets';
 import { sourceToIcon } from 'constants/shared.constant';
 import { ICandidate } from 'requests/vacancy.request';
 import loaderGif from 'assets/loader/loader.gif';
+import Loader from 'components/loader/loader.component';
 
 interface TableProps {
   data: ICandidate[];
@@ -48,8 +49,8 @@ const CandidateTable: FC<TableProps> = ({ data, currentPage, rowsPerPage, setCur
     <>
       {
         loading
-          ? <div className="loader">
-            <img src={loaderGif} alt="Loading..." style={{ width: '150px', height: '150px' }} />
+          ? <div className="loader-container">
+            <Loader />
           </div>
           : <table className="styled-table candidates-table">
             <thead>

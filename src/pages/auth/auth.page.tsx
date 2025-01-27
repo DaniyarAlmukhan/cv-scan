@@ -58,7 +58,7 @@ const Auth = () => {
   };
 
   return (
-    <Loader loading={loading}>
+    <>
       <div className="auth__container">
         <div className="auth__box">
           <h2>{t(`auth.title.${authType}`)}</h2>
@@ -86,7 +86,7 @@ const Auth = () => {
           </FormikProvider>
         </div>
       </div>
-    </Loader>
+    </>
   );
 };
 

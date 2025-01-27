@@ -343,10 +343,10 @@
   }
 }
 
-.loader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%; 
+.loader-container {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
 }

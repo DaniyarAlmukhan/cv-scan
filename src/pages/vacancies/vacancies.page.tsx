@@ -66,21 +66,10 @@ const VacanciesPage = () => {
   }
 
   const fetchData = () => {
-    fetchActiveVacancies().then((allOptions) => {
-      fetchPaginatedVacancies(currentPage, rowsPerPage, 'active', search.name).then((paginatedOptions) => {
-        const combine = paginatedOptions.data.map((vacancy: IVacancy) => ({
-          ...vacancy,
-          ...allOptions.find((option: IVacancy) => option.vacancy_id === vacancy.vacancy_id),
-          status: allOptions.find((option: IVacancy) => option.vacancy_id === vacancy.vacancy_id).active ? 'published' : 'closed'
-        }));
-
-        setInitialData(combine);
-        setTotalPages(Math.ceil(paginatedOptions.total / rowsPerPage));
-        setTotalItems(paginatedOptions.total);
-
-        // Update filteredData based on the current search criteria
-        setFilteredData(combine);
-      });
+    fetchPaginatedVacancies(currentPage, rowsPerPage, 'active', search.name).then((paginatedOptions) => {
+      setTotalPages(Math.ceil(paginatedOptions.total / rowsPerPage));
+      setTotalItems(paginatedOptions.total);
+      setFilteredData(paginatedOptions.data);
     });
   }
 
@@ -120,7 +109,7 @@ const VacanciesPage = () => {
 
   useEffect(() => {
     setTabCounts({
-      mine: initialData.length,
+      mine: totalItems,
       draft: initialData.filter(vacancy => vacancy.status === 'draft').length,
       published: initialData.filter(vacancy => vacancy.status === 'published').length,
       archive: initialData.filter(vacancy => vacancy.status === 'closed').length,
