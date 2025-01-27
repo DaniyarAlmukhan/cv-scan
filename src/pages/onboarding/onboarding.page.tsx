@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { CopyIcon, Send } from "assets";
 import Search from "components/search-chat/search-chat.component";
 import './onboarding.style.scss';
-import { getChatResponse } from "requests/onboarding.request";
+import { getChatResponse, IChatMessage } from "requests/onboarding.request";
 
 const OnboardingPage = () => {
   const [isChatOpen, setIsChatOpen] = React.useState<boolean>(false);
@@ -31,11 +31,14 @@ const OnboardingPage = () => {
       setMsgs((prevMsgs) => [...prevMsgs, newMessage]);
       setIsLoading(true);
 
-      // const chatKey = msg === internet_msg || msgs[0]?.content === internet_msg ? ChatKey.INTERNET : ChatKey.OTHERS;
-
       getChatResponse(msg)
         .then((response) => {
-          console.log(response)
+          const botMessage: any = {
+            role: "assistant",
+            content: response.response,
+            time: new Date().toLocaleTimeString(),
+          };
+          setMsgs((prevMsgs) => [...prevMsgs, botMessage]);
         })
         .catch(() => {
           const botMessage: any = {
@@ -46,24 +49,6 @@ const OnboardingPage = () => {
           setMsgs((prevMsgs) => [...prevMsgs, botMessage]);
         })
         .finally(() => setIsLoading(false));
-
-      // getChatAnswerV2(chatId, msg, chatKey).then((response) => {
-      //   const botMessage: IMessage = {
-      //     role: "assistant",
-      //     content: response.text,
-      //     time: new Date().toLocaleTimeString(),
-      //   };
-      //   setMsgs((prevMsgs) => [...prevMsgs, botMessage]);
-      // })
-      //   .catch(() => {
-      //     const botMessage: IMessage = {
-      //       role: "assistant",
-      //       content: 'Произошла ошибка, попробуйте еще раз',
-      //       time: new Date().toLocaleTimeString(),
-      //     };
-      //     setMsgs((prevMsgs) => [...prevMsgs, botMessage]);
-      //   })
-      //   .finally(() => setIsLoading(false));
 
       setSearchValue("");
     }
