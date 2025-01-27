@@ -1,0 +1,29 @@
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 1rem;
+  line-height: 0.875em;
+  padding: 0.5em 1em;
+  border: 1px solid transparent;
+  border-radius: 0.3125em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background-color: var(--color-white);
+  color: var(--color-dark-blue);
+  &:hover:not(:disabled) {
+    filter: brightness(95%);
+  }
+  &:disabled {
+    background-color: #b9b9b9;
+  }
+  &__primary {
+    background-color: var(--color-green);
+    color: var(--color-white);
+  }
+  &__secondary {
+    background-color: var(--color-white);
+    color: var(--color-green);
+    border-color: var(--color-green);
+  }
+}

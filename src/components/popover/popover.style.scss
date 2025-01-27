@@ -1,0 +1,71 @@
+@keyframes fade {
+  0% {
+    opacity: 0;
+    display: none;
+  }
+  100% {
+    opacity: 1;
+    display: block;
+  }
+}
+
+.popover {
+  &__wrapper {
+    position: relative;
+    &--relativeToParent {
+      position: unset;
+    }
+  }
+  &__content {
+    display: none;
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    background: transparent;
+    z-index: 1;
+    animation: fade 0.25s linear;
+    background: var(--color-white);
+    border-radius: 0.9375rem;
+    padding: 0.3125rem;
+    box-shadow: 0 0 6px 0 #0000001a;
+    &--isOpen {
+      display: block;
+    }
+
+    &--top {
+      top: auto;
+      bottom: calc(100% + 5px);
+      left: 0;
+    }
+
+    &--right {
+      top: 0;
+      left: calc(100% + 5px);
+    }
+
+    &--left {
+      top: 0;
+      left: auto;
+      right: calc(100% + 5px);
+    }
+
+    &--left-bottom {
+      top: auto;
+      bottom: 0;
+      left: auto;
+      right: calc(100% + 5px);
+    }
+
+    &--right-bottom {
+      top: auto;
+      bottom: 0;
+      right: auto;
+      left: calc(100% + 5px);
+    }
+
+    &--bottom-right {
+      right: 0;
+      left: auto;
+    }
+  }
+}

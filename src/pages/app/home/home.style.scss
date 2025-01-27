@@ -1,0 +1,39 @@
+.home {
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+
+  &__filters {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: flex-start;
+    padding-left: 30px;
+
+    .input {
+      width: min-content;
+      height: 48px;
+
+      input {
+        text-indent: 10px;
+      }
+    }
+  }
+
+  &__grid {
+    margin-top: 4px;
+    display: grid;
+    padding: 0 30px;
+    gap: 30px;
+    grid-template-columns: repeat(4, minmax(200px, 1fr));
+    grid-template-rows: auto;
+  }
+
+  .chat {
+    justify-self: flex-end;
+    margin-top: auto;
+    padding-left: 30px;
+  }
+}

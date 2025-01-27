@@ -1,0 +1,69 @@
+.dashboard-card {
+  position: relative;
+  height: 11.875rem;
+  border: 1px solid var(--color-border-gray);
+  padding: 30px 20px 30px 30px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    width: 45%;
+    background: var(--color-green);
+    box-shadow: 0px 2px 3px 0px #7171d633;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &:hover {
+    border: 1px solid #50B74866;
+    box-shadow: 0px 8px 10px 0px #7171D633;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+  }
+
+  &__bubble-content {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  &__body {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__vacancy {
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    max-width: 100%;
+  }
+
+
+  &__controls {
+    display: flex;
+    button {
+      background: none;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+  }
+}

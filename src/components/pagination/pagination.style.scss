@@ -1,0 +1,36 @@
+.pagination {
+  display: flex;
+  gap: 5px;
+  &--centered {
+    justify-content: center;
+  }
+  & button {
+    padding: 0.3125rem 0.625rem;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    &.active {
+      background-color: var(--color-green);
+      color: var(--color-white);
+      border-color: var(--color-green);
+    }
+    & > svg {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &:disabled {
+      background-color: #ddd;
+      cursor: not-allowed;
+    }
+    &:first-child {
+      border-top-left-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+    }
+    &:last-child {
+      border-top-right-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+    }
+  }
+}
