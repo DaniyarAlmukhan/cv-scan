@@ -70,10 +70,11 @@ const CandidateTable: FC<TableProps> = ({ data, currentPage, rowsPerPage, setCur
               {
                 data.map((row) => (
                   <tr key={row.key}>
-                    <td>Название вакансии</td>
+                    <td>{row.vacancy_name}</td>
                     <td>
                       <div className="candidate-source">
-                        Источник
+                        {sourceToIcon[row.platform]}
+                        {row.platform}
                       </div> </td>
                     <td>
                       <div>

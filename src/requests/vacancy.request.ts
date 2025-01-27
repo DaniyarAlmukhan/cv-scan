@@ -27,6 +27,8 @@ export interface ICandidate {
   response_date: string;
   status: any;
   vacancy_id: string;
+  vacancy_name: string;
+  platform: "headhunter" | "linkedin"
 }
 
 

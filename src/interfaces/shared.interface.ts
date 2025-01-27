@@ -42,4 +42,4 @@ export type Route =
   // | 'documents';
   | 'onboarding';
 
-export type Source = 'linkedin' | 'hh' | 'enbek';
+export type Source = 'linkedin' | 'headhunter' | 'enbek';

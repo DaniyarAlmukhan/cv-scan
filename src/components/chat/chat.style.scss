@@ -80,11 +80,11 @@
       align-self: flex-end;
       margin-left: auto;
 
-      .chat__message__top {
+      .full_chat__message__top {
         justify-content: flex-end;
       }
 
-      .chat__message__text {
+      .full_chat__message__text {
         border: 1px solid var(--color-gray-20);
         border-radius: 20px;
         padding: 20px 24px;
@@ -92,7 +92,7 @@
     }
 
     &.assistant {
-      .chat__message__bottom {
+      .full_chat__message__bottom {
         justify-content: flex-start;
         padding-left: 54px;
         padding-top: 10px;

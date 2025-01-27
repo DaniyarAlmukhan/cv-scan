@@ -74,7 +74,7 @@ const CandidateAnalysis: FC<IProps> = ({ data }) => {
         <div className="candidate-analysis__subheading">
           <div>
             <Text fontSize='1rem' color='var(--color-dark-gray)' fontWeight={400}>{t('analysis.vacancy')}</Text>
-            <Text fontSize='1.125rem' color='#000' fontWeight={600}>Название вакансии </Text>
+            <Text fontSize='1.125rem' color='#000' fontWeight={600}>{data.vacancy_name} </Text>
           </div>
           <div>
             <Text fontSize='1rem' color='var(--color-dark-gray)' fontWeight={400}>{t('analysis.response_time')}</Text>
