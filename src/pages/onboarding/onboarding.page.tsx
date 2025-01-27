@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { CopyIcon, Send } from "assets";
 import Search from "components/search-chat/search-chat.component";
 import './onboarding.style.scss';
-import { getChatResponse, IChatMessage } from "requests/onboarding.request";
+import { getChartStart, getChatResponse, IChatMessage } from "requests/onboarding.request";
 
 const OnboardingPage = () => {
   const [isChatOpen, setIsChatOpen] = React.useState<boolean>(false);
@@ -33,6 +33,7 @@ const OnboardingPage = () => {
 
       getChatResponse(msg)
         .then((response) => {
+          console.log(response)
           const botMessage: any = {
             role: "assistant",
             content: response.response,
@@ -52,6 +53,7 @@ const OnboardingPage = () => {
 
       setSearchValue("");
     }
+    
   };
 
   useEffect(() => {
@@ -61,6 +63,10 @@ const OnboardingPage = () => {
       localStorage.setItem("chat_id", newChatId);
       storedChatId = newChatId;
     }
+
+    getChartStart().then((response) => {
+      console.log(response)
+    });
   }, []);
 
 

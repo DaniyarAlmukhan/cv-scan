@@ -14,5 +14,9 @@ export interface IChatResponse {
 const baseUrl = "http://91.185.21.250/api";
 
 export const getChatResponse = (question: string): Promise<IChatResponse> => {
-  return api.post(`${baseUrl}/onboarding/query?question=${question}`).then(res => res.data);
+  return api.post(`/onboarding/query?question=${question}`);
 } 
+
+export const getChartStart = () => {
+  return api.get(`/onboarding/start`).then(res => res.data);
+}

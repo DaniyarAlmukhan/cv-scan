@@ -47,6 +47,11 @@
     &__top {
       display: flex;
       gap: 20px;
+
+      svg {
+        min-width: 34px;
+        min-height: 34px;
+      }
     }
 
     &__bottom {

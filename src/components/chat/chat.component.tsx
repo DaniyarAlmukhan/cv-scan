@@ -40,14 +40,16 @@ const Chat: React.FC<IProps> = ({
     return text?.split("\n").map((line, index) => (
       <React.Fragment key={index}>
         {line
-          ?.split(/(\*\*.*?\*\*)/)
-          .map((part, i) =>
-            part.startsWith("**") && part.endsWith("**") ? (
-              <strong key={i}>{part.slice(2, -2)}</strong>
-            ) : (
-              <span key={i}>{part}</span>
-            ),
-          )}
+          ?.split(/(\*\*.*?\*\*|\*)/)
+          .map((part, i) => {
+            if (part.startsWith("**") && part.endsWith("**")) {
+              return <strong style={{ fontWeight: 600 }} key={i}>{part.slice(2, -2)}</strong>;
+            } else if (part === "*") {
+              return <br key={i} />;
+            } else {
+              return <span key={i}>{part}</span>;
+            }
+          })}
         {index < text?.split("\n").length - 1 && <br />}
       </React.Fragment>
     ));
