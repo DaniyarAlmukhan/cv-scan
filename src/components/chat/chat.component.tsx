@@ -39,7 +39,7 @@ const Chat: React.FC<IProps> = ({
   };
 
   const handleSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (!isLoading && e.key === "Enter") {
       handleSendMessage(query);
       setQuery('');
     }
@@ -76,7 +76,7 @@ const Chat: React.FC<IProps> = ({
 
   return (
     <div className={'full_chat'}>
-      <div ref={chatBodyRef} className={'full_chat__body'}>
+      <div ref={chatBodyRef} className={`full_chat__body ${isSecondOption ? 'second-option' : ''}`}>
         {messages?.map((msg: any, index: number) => (
           <div
             key={index}
@@ -118,7 +118,7 @@ const Chat: React.FC<IProps> = ({
             <div
               key={index}
               className={'full_chat__open-chat-question'}
-              onClick={() => handleSendMessage(question, true)}
+              onClick={() => !isLoading && handleSendMessage(question, true)}
             >
               {question}
             </div>
@@ -135,8 +135,11 @@ const Chat: React.FC<IProps> = ({
         <div
           className={'full_chat__send'}
           onClick={() => {
-            handleSendMessage(query);
-            setQuery('');
+            if (!isLoading) {
+              handleSendMessage(query);
+              setQuery('');
+            }
+
           }}
         >
           <SendIcon />

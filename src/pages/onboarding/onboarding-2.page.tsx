@@ -72,7 +72,7 @@ const OnboardingPage2 = () => {
   return (
     <div className="main">
       <section
-        className={`main__help open `}
+        className={`main__help open`}
         style={{ paddingTop: 0 }}
       >
         <div className={'main__help__wrapper'}>
