@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./chat.style.scss";
 import { BotAvatar, CloseIcon, CopyIcon } from "assets";
 import { SendIcon } from "lucide-react";
+import BotAvatarPerson from 'assets/icons/bot_avatar.jpg'
 
 interface IProps {
   messages: any[];
@@ -84,7 +85,7 @@ const Chat: React.FC<IProps> = ({
           >
             <div className={'full_chat__message__top'}>
               {msg.role === "assistant" && (
-                <BotAvatar />
+                <img src={BotAvatarPerson} alt="" />
               )}
               <div className={'full_chat__message__text'}>
                 {msg.role === "assistant"
@@ -105,7 +106,7 @@ const Chat: React.FC<IProps> = ({
         ))}
         {isLoading && (
           <div className={'full_chat__message__top'}>
-            <BotAvatar />
+            <img src={BotAvatarPerson} alt="" />
             <div className={'full_chat__loading-container'}>
               <div className={'full_chat__loading-icon'}></div>
             </div>
