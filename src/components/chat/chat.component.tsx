@@ -53,7 +53,9 @@ const Chat: React.FC<IProps> = ({
 
   const formatMessage = (text: string) => {
     return text?.split("\n").map((line, index) => {
-      const headerMatch = line.match(/^(#+)\s*(.*)/);
+      const trimmedLine = line.trim(); // Trim the line
+      const headerMatch = trimmedLine.match(/^(#+)\s*(.*)/); // Match against trimmed line
+
       if (headerMatch) {
         const headerLevel = headerMatch[1].length; // Number of # characters
         const headerText = headerMatch[2]; // Text after the # characters
