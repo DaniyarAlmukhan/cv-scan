@@ -63,7 +63,7 @@
     "conclusion": "Заключение",
     "contact": "Контактные данные кандидата",
     "linkedin": "LinkedIn",
-    "hh": "hh.kz",
+    "hh.kz": "hh.kz",
     "headhunter": "headhunter",
     "enbek": "enbek.kz",
     "analyze": "Анализ",
@@ -77,7 +77,7 @@
     "rating": "Рейтинг кандидата",
     "skills": "Ключевые навыки",
     "response_time": "Время отклика",
-    "missing_skills": "Отсутствующие ключевые навыки",
+    "missing_skills": "Оценка навыков",
     "recommendations": "Рекомендации",
     "conclusion": "Заключение"
   },

@@ -137,7 +137,7 @@ export default function Search({
             value={searchValue}
             onChange={handleChange}
             onKeyUp={handleSubmit}
-            placeholder="Поиск"
+            placeholder="Введите запрос"
             onFocus={() => {
               if (msgs.length > 0) {
                 setIsChatOpenAction(true);

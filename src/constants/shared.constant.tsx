@@ -43,10 +43,10 @@ export const routeToIcon: Record<Route, any> = {
   // },
 }
 
-export const sources: Source[] = ['linkedin', 'headhunter', 'enbek'];
+export const sources: Source[] = ['linkedin', 'hh.kz', 'enbek'];
 
 export const sourceToIcon: Record<Source, any> = {
   "linkedin": <LinkedIn />,
-  "headhunter": <HhKz />,
+  "hh.kz": <HhKz />,
   "enbek": <EnbekKz />,
 }

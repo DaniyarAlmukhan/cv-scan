@@ -7,7 +7,6 @@ import { Text } from 'components/text.component';
 import { ChevronLeft, ChevronRight, SortIcon } from 'assets';
 import { sourceToIcon } from 'constants/shared.constant';
 import { ICandidate } from 'requests/vacancy.request';
-import loaderGif from 'assets/loader/loader.gif';
 import Loader from 'components/loader/loader.component';
 
 interface TableProps {

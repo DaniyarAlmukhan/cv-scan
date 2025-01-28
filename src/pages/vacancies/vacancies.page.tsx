@@ -9,7 +9,7 @@ import { IVacancy } from 'interfaces/shared.interface';
 import VacancyTable from 'components/table/vacancy-table.component';
 import { Archive } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { fetchActiveVacancies, fetchPaginatedVacancies } from 'requests/vacancy.request';
+import { fetchActiveVacancies, fetchPaginatedVacancies, getRegions, IRegionItem } from 'requests/vacancy.request';
 import PageHeader from 'components/page-header/page-header.component';
 
 const statuses = ['draft', 'published', 'closed'];
@@ -21,7 +21,8 @@ const VacanciesPage = () => {
   const [search, setSearch] = useState({
     name: '',
     status: '',
-    date: ''
+    date: '',
+    region_name: ''
   });
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [initialData, setInitialData] = useState<IVacancy[]>([]);
@@ -32,11 +33,11 @@ const VacanciesPage = () => {
     published: 0,
     archive: 0
   });
-  const [filteredStatuses, setFilteredStatuses] = useState<{ label: string, value: string }[]>(statuses.map(status => ({ label: t(`vacancies.${status}`), value: status })));
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
+  const [regionList, setRegionList] = useState<{ label: string, value: string }[]>([]);
 
   const tabs = [
     'mine',
@@ -55,7 +56,8 @@ const VacanciesPage = () => {
     setSearch({
       name: '',
       status: '',
-      date: ''
+      date: '',
+      region_name: ''
     });
   }
 
@@ -105,7 +107,7 @@ const VacanciesPage = () => {
 
   useEffect(() => {
     fetchData()
-  }, [currentPage, rowsPerPage, search.name]);
+  }, [currentPage, rowsPerPage, search.name, search.region_name]);
 
   useEffect(() => {
     setTabCounts({
@@ -115,6 +117,13 @@ const VacanciesPage = () => {
       archive: initialData.filter(vacancy => vacancy.status === 'closed').length,
     });
   }, [initialData]);
+
+  useEffect(() => {
+    getRegions().then(res => {
+      const mappedList = res.map(region => ({ label: region.region_name, value: region.region_name }));
+      setRegionList(mappedList);
+    });
+  }, []);
 
   return <div className='vacancies'>
     <PageHeader title={t('vacancies.title')} />
@@ -130,14 +139,6 @@ const VacanciesPage = () => {
       <div className="vacancies__table-container">
         <div className="vacancies__filters">
           <div className="vacancies__filters__left">
-            <Input
-              name='name'
-              value={search.name}
-              placeholder='Название'
-              onChange={(e) => setSearch(prev => ({ ...prev, name: e.target.value }))}
-              style={{ width: '21.875rem' }}
-              active={!!search.name}
-            />
           </div>
           <div className="vacancies__filters__right">
             <Input
@@ -150,18 +151,18 @@ const VacanciesPage = () => {
             />
 
             <Select
-              name='status'
-              options={filteredStatuses}
+              name='region_name'
+              options={regionList}
               valueKey='value'
               labelKey='label'
               style={{ width: '15rem' }}
-              value={search.status}
-              onChange={(e) => setSearch(prev => ({ ...prev, status: e.target.value }))}
-              active={!!search.status && search.status !== ''}
+              value={search.region_name}
+              onChange={(e) => setSearch(prev => ({ ...prev, region_name: e.target.value }))}
+              active={!!search.region_name && search.region_name !== ''}
               hideNullOption={activeTab !== 'mine'}
             />
 
-            <Input
+            {/* <Input
               name='date'
               value={search.date}
               placeholder='Дата'
@@ -169,7 +170,7 @@ const VacanciesPage = () => {
               onChange={(e) => setSearch(prev => ({ ...prev, date: e.target.value }))}
               style={{ width: '10rem' }}
               active={!!search.date}
-            />
+            /> */}
 
             {!!selectedItems.length && <button type='button' className='vacancies__filters__archive' onClick={() => handleArchive(selectedItems)}>
               <Archive width={15} stroke='white' />

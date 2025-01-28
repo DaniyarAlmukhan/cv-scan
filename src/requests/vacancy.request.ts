@@ -28,9 +28,13 @@ export interface ICandidate {
   status: any;
   vacancy_id: string;
   vacancy_name: string;
-  platform: "headhunter" | "linkedin"
+  platform: "hh.kz" | "linkedin"
 }
 
+export interface IRegionItem {
+  region_id: number;
+  region_name: string;
+}
 
 export const fetchActiveVacancies = async (): Promise<any> => {
   return api.get(`/vacancies/options`);
@@ -54,3 +58,7 @@ export const fetchResponses = async (
   const params = { vacancy_id, current, pageSize };
   return api.get(`/responses`, { params });
 };
+
+export const getRegions = async (): Promise<IRegionItem[]> => {
+  return api.get(`/regions/options`);
+}
