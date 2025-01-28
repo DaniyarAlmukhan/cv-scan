@@ -124,18 +124,18 @@ const CandidatesPage = () => {
       <div className="vacancies__table-container">
         <div className="vacancies__filters">
           <div className="vacancies__filters__left">
-            <Input
+            {/* <Input
               name='name'
               value={search.name}
               placeholder='Название'
               onChange={(e) => setSearch(prev => ({ ...prev, name: e.target.value }))}
               style={{ width: '21.875rem' }}
               active={!!search.name}
-            />
+            /> */}
           </div>
 
           <div className="vacancies__filters__right">
-            <Select
+            {/* <Select
               name='source'
               options={sources.map((source) => ({ label: t(`candidates.${source}`), value: source }))}
               valueKey='value'
@@ -145,7 +145,7 @@ const CandidatesPage = () => {
               onChange={(e) => setSearch(prev => ({ ...prev, source: e.target.value }))}
               active={!!search.source && search.source !== ''}
               placeholder='Источник'
-            />
+            /> */}
 
             {/* <Select
               name='vacancy'
@@ -159,7 +159,7 @@ const CandidatesPage = () => {
               labelKey='label'
             /> */}
 
-            <Input
+            {/* <Input
               name='responseTime'
               value={search.responseTime}
               placeholder='Дата'
@@ -175,7 +175,7 @@ const CandidatesPage = () => {
 
             <button type='button' className='vacancies__filters__reload' onClick={handleReload}>
               <Reload />
-            </button>
+            </button> */}
           </div>
         </div>
 

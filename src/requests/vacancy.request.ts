@@ -44,9 +44,10 @@ export const fetchPaginatedVacancies = async (
   current = 1,
   pageSize = 20,
   status: 'active' | 'closed' = 'active',
-  search?: string
+  search?: string,
+  region_id?: string,
 ): Promise<PaginatedResponse<IVacancy>> => {
-  const params = { status, search, current, pageSize };
+  const params = { status, search, current, pageSize, region_id };
   return api.get(`/vacancies`, { params });
 };
 

@@ -129,7 +129,7 @@ const Chat: React.FC<IProps> = ({
           className={'full_chat__input'}
           value={query}
           onChange={handleChange}
-          placeholder="Поиск"
+          placeholder="Введите запрос"
           onKeyUp={handleSubmit}
         />
         <div

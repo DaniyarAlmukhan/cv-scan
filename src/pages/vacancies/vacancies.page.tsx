@@ -22,7 +22,7 @@ const VacanciesPage = () => {
     name: '',
     status: '',
     date: '',
-    region_name: ''
+    region_id: ''
   });
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [initialData, setInitialData] = useState<IVacancy[]>([]);
@@ -37,7 +37,7 @@ const VacanciesPage = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
-  const [regionList, setRegionList] = useState<{ label: string, value: string }[]>([]);
+  const [regionList, setRegionList] = useState<{ label: string, value: number }[]>([]);
 
   const tabs = [
     'mine',
@@ -57,7 +57,7 @@ const VacanciesPage = () => {
       name: '',
       status: '',
       date: '',
-      region_name: ''
+      region_id: ''
     });
   }
 
@@ -67,8 +67,12 @@ const VacanciesPage = () => {
     setSelectedItems([]);
   }
 
-  const fetchData = () => {
-    fetchPaginatedVacancies(currentPage, rowsPerPage, 'active', search.name).then((paginatedOptions) => {
+  const fetchData = (initial = false) => {
+    const currPage: number = initial ? 1 : currentPage;
+    if(initial){
+      setCurrentPage(1);
+    }
+    fetchPaginatedVacancies(currPage, rowsPerPage, 'active', search.name, search.region_id).then((paginatedOptions) => {
       setTotalPages(Math.ceil(paginatedOptions.total / rowsPerPage));
       setTotalItems(paginatedOptions.total);
       setFilteredData(paginatedOptions.data);
@@ -107,7 +111,13 @@ const VacanciesPage = () => {
 
   useEffect(() => {
     fetchData()
-  }, [currentPage, rowsPerPage, search.name, search.region_name]);
+  }, [currentPage]);
+
+  useEffect(() => {
+    fetchData(true)
+  }, [rowsPerPage, search.name, search.region_id]);
+
+
 
   useEffect(() => {
     setTabCounts({
@@ -116,11 +126,11 @@ const VacanciesPage = () => {
       published: initialData.filter(vacancy => vacancy.status === 'published').length,
       archive: initialData.filter(vacancy => vacancy.status === 'closed').length,
     });
-  }, [initialData]);
+  }, [totalItems, initialData]);
 
   useEffect(() => {
     getRegions().then(res => {
-      const mappedList = res.map(region => ({ label: region.region_name, value: region.region_name }));
+      const mappedList = res.map(region => ({ label: region.region_name, value: +region.region_id }));
       setRegionList(mappedList);
     });
   }, []);
@@ -151,14 +161,14 @@ const VacanciesPage = () => {
             />
 
             <Select
-              name='region_name'
+              name='region_id'
               options={regionList}
               valueKey='value'
               labelKey='label'
               style={{ width: '15rem' }}
-              value={search.region_name}
-              onChange={(e) => setSearch(prev => ({ ...prev, region_name: e.target.value }))}
-              active={!!search.region_name && search.region_name !== ''}
+              value={search.region_id}
+              onChange={(e) => setSearch(prev => ({ ...prev, region_id: e.target.value }))}
+              active={!!search.region_id && search.region_id !== ''}
               hideNullOption={activeTab !== 'mine'}
             />
 

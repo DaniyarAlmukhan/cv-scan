@@ -163,7 +163,7 @@ const VacancyTable: FC<TableProps> = ({ data, selectedItems, setSelectedItems, o
 
               <div className="styled-table__current-items">
                 <Text color='#121C2680' onClick={() => setIsOpen(!isOpen)}>
-                  {`${(currentPage - 1) * rowsPerPage + 1}-${Math.min(
+                  {`${data.length === 0 ? 0 : (currentPage - 1) * rowsPerPage + 1}-${Math.min(
                     currentPage * rowsPerPage,
                     Math.min(data.length * rowsPerPage, totalItems)
                   )}`}
