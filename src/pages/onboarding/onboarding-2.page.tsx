@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Search from "components/search-chat/search-chat.component";
 import './onboarding.style.scss';
-import { getChatResponse } from "requests/onboarding.request";
+import { getChartStart, getChatResponse } from "requests/onboarding.request";
 
 const OnboardingPage2 = () => {
   const [isChatOpen, setIsChatOpen] = React.useState<boolean>(false);
@@ -13,7 +13,13 @@ const OnboardingPage2 = () => {
     if (dropChatId) {
       const newChatId = `${Date.now()}_${Math.random().toString(36).substring(2, 10)}`;
       localStorage.setItem("chat_id", newChatId);
-      setMsgs([]);
+      if (msgs && msgs.length > 0) {
+        if (msgs[0].role === 'assistant') {
+          setMsgs([msgs[0]]);
+        } else {
+          setMsgs([]);
+        }
+      }
     }
 
     const chatId = localStorage.getItem("chat_id");
@@ -63,9 +69,15 @@ const OnboardingPage2 = () => {
       storedChatId = newChatId;
     }
 
-    // getChartStart().then((response) => {
-    //   console.log(response)
-    // });
+    getChartStart().then((response) => {
+      const botMessage: any = {
+        role: "assistant",
+        content: response.welcome_message,
+        time: new Date().toLocaleTimeString(),
+      };
+      setMsgs((prevMsgs) => [...prevMsgs, botMessage]);
+    });
+
   }, []);
 
 

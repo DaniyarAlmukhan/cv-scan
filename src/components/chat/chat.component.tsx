@@ -49,7 +49,7 @@ const Chat: React.FC<IProps> = ({
     if (window.location.pathname.includes('onboarding-2')) {
       setIsSecondOption(true);
     }
-  }, [isSecondOption]);
+  }, []);
 
   const formatMessage = (text: string) => {
     return text?.split("\n").map((line, index) => (
