@@ -77,7 +77,7 @@ const OnboardingPage = () => {
         <div className={'main__help__wrapper'}>
           {!isChatOpen && (
             <>
-              <h1 className={'main__title'}>Добро пожаловать в команду АО «Транстелеком»! Используйте наш портал для быстрого доступа к информации и помощи.</h1>
+              <h1 className={'main__title'}>Добро пожаловать в команду! Как я могу вам помочь</h1>
               <h2 className={'main__subtitle'}>Выберите тему ниже или задайте вопрос нашему чат-боту</h2>
 
             </>
