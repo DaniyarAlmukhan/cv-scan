@@ -199,20 +199,21 @@
   }
 
   &__open-chat-questions {
-    position: absolute;
     display: flex;
-    align-items: center;
-    top: 0;
-    transform: translateY(-120%);
+    align-items: stretch;
     gap: 10px;
+    margin-bottom: 10px;
+    max-width: 100%;
   }
 
   &__open-chat-question {
-    padding: 5px;
+    padding: 0.3125rem 0.625rem;
     border-radius: 20px;
     border: 1px solid var(--color-green);
     text-align: center;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 
     &:hover {
       background: var(--color-green);

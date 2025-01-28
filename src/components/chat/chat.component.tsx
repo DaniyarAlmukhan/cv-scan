@@ -52,22 +52,47 @@ const Chat: React.FC<IProps> = ({
   }, []);
 
   const formatMessage = (text: string) => {
-    return text?.split("\n").map((line, index) => (
-      <React.Fragment key={index}>
-        {line
-          ?.split(/(\*\*.*?\*\*|\*)/)
-          .map((part, i) => {
-            if (part.startsWith("**") && part.endsWith("**")) {
-              return <strong style={{ fontWeight: 600 }} key={i}>{part.slice(2, -2)}</strong>;
-            } else if (part === "*") {
-              return <br key={i} />;
-            } else {
-              return <span key={i}>{part}</span>;
-            }
-          })}
-        {index < text?.split("\n").length - 1 && <br />}
-      </React.Fragment>
-    ));
+    return text?.split("\n").map((line, index) => {
+      const headerMatch = line.match(/^(#+)\s*(.*)/);
+      if (headerMatch) {
+        const headerLevel = headerMatch[1].length; // Number of # characters
+        const headerText = headerMatch[2]; // Text after the # characters
+
+        switch (headerLevel) {
+          case 1:
+            return <h1 key={index}>{headerText}</h1>;
+          case 2:
+            return <h2 key={index}>{headerText}</h2>;
+          case 3:
+            return <h3 key={index}>{headerText}</h3>;
+          case 4:
+            return <h4 key={index}>{headerText}</h4>;
+          case 5:
+            return <h5 key={index}>{headerText}</h5>;
+          case 6:
+            return <h6 key={index}>{headerText}</h6>;
+          default:
+            return <span key={index}>{line}</span>;
+        }
+      }
+
+      return (
+        <React.Fragment key={index}>
+          {line
+            ?.split(/(\*\*.*?\*\*|\*)/)
+            .map((part, i) => {
+              if (part.startsWith("**") && part.endsWith("**")) {
+                return <strong style={{ fontWeight: 600 }} key={i}>{part.slice(2, -2)}</strong>;
+              } else if (part === "*") {
+                return <br key={i} />;
+              } else {
+                return <span key={i}>{part}</span>;
+              }
+            })}
+          {index < text?.split("\n").length - 1 && <br />}
+        </React.Fragment>
+      );
+    });
   };
 
   const handleCopy = (text: string) => {
@@ -76,7 +101,7 @@ const Chat: React.FC<IProps> = ({
 
   return (
     <div className={'full_chat'}>
-      <div ref={chatBodyRef} className={`full_chat__body ${isSecondOption ? 'second-option' : ''}`}>
+      <div ref={chatBodyRef} className={`full_chat__body `}>
         {messages?.map((msg: any, index: number) => (
           <div
             key={index}
@@ -112,19 +137,19 @@ const Chat: React.FC<IProps> = ({
           </div>
         )}
       </div>
-      <div className={'full_chat__footer'}>
-        <div className="full_chat__open-chat-questions">
-          {isSecondOption && option2Questions.map((question, index) => (
-            <div
-              key={index}
-              className={'full_chat__open-chat-question'}
-              onClick={() => !isLoading && handleSendMessage(question, true)}
-            >
-              {question}
-            </div>
-          ))}
-        </div>
 
+      <div className="full_chat__open-chat-questions">
+        {isSecondOption && option2Questions.map((question, index) => (
+          <div
+            key={index}
+            className={'full_chat__open-chat-question'}
+            onClick={() => !isLoading && handleSendMessage(question, true)}
+          >
+            {question}
+          </div>
+        ))}
+      </div>
+      <div className={'full_chat__footer'}>
         <input
           className={'full_chat__input'}
           value={query}
@@ -139,7 +164,6 @@ const Chat: React.FC<IProps> = ({
               handleSendMessage(query);
               setQuery('');
             }
-
           }}
         >
           <SendIcon />
