@@ -5,10 +5,18 @@ import { SendIcon } from "lucide-react";
 
 interface IProps {
   messages: any[];
-  handleSendMessage: (message: string) => void;
+  handleSendMessage: (message: string, clearChat?: boolean) => void;
   handleClose?: VoidFunction;
   isLoading?: boolean;
 }
+
+const option2Questions = [
+  "Каковы основные ценности компании?",
+  "Какие инструменты используются для внутреннего общения?",
+  "Каковы основные направления деятельности компании?",
+  "Как я могу получить доступ к корпоративным ресурсам?",
+  "Кто мои непосредственные руководители?",
+]
 
 const Chat: React.FC<IProps> = ({
   messages,
@@ -18,6 +26,7 @@ const Chat: React.FC<IProps> = ({
 }) => {
   const chatBodyRef = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState("");
+  const [isSecondOption, setIsSecondOption] = useState(false);
 
   useEffect(() => {
     if (chatBodyRef.current) {
@@ -35,6 +44,12 @@ const Chat: React.FC<IProps> = ({
       setQuery('');
     }
   };
+
+  useEffect(() => {
+    if (window.location.pathname.includes('onboarding-2')) {
+      setIsSecondOption(true);
+    }
+  }, [isSecondOption]);
 
   const formatMessage = (text: string) => {
     return text?.split("\n").map((line, index) => (
@@ -98,6 +113,18 @@ const Chat: React.FC<IProps> = ({
         )}
       </div>
       <div className={'full_chat__footer'}>
+        <div className="full_chat__open-chat-questions">
+          {isSecondOption && option2Questions.map((question, index) => (
+            <div
+              key={index}
+              className={'full_chat__open-chat-question'}
+              onClick={() => handleSendMessage(question, true)}
+            >
+              {question}
+            </div>
+          ))}
+        </div>
+
         <input
           className={'full_chat__input'}
           value={query}

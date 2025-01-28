@@ -9,6 +9,7 @@ import VacanciesPage from './vacancies/vacancies.page';
 import CreateVacancyPage from './vacancies/create-vacancy.page';
 import CandidatesPage from './candidates/candidates.page';
 import OnboardingPage from './onboarding/onboarding.page';
+import OnboardingPage2 from './onboarding/onboarding-2.page';
 
 export default function RoutesIndex() {
   return (
@@ -22,6 +23,7 @@ export default function RoutesIndex() {
         <Route path="vacancies/create" element={<CreateVacancyPage />} />
         <Route path="candidates" element={<CandidatesPage />} />
         <Route path="onboarding" element={<OnboardingPage />} />
+        <Route path="onboarding-2" element={<OnboardingPage2 />} />
         <Route path="*" element={<Navigate to="/app/vacancies" />} />
       </Route>
     </Routes>

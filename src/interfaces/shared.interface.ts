@@ -41,6 +41,7 @@ export type Route =
   // | 'adaptation'
   // | 'education'
   // | 'documents';
-  | 'onboarding';
+  | 'onboarding'
+  | 'onboarding-2';
 
 export type Source = 'linkedin' | 'hh.kz' | 'enbek';

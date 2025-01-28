@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import Search from "components/search-chat/search-chat.component";
 import './onboarding.style.scss';
-import {  getChatResponse } from "requests/onboarding.request";
+import { getChatResponse } from "requests/onboarding.request";
 
-const OnboardingPage = () => {
+const OnboardingPage2 = () => {
   const [isChatOpen, setIsChatOpen] = React.useState<boolean>(false);
   const [searchValue, setSearchValue] = React.useState<string>("");
   const [msgs, setMsgs] = React.useState<any[]>([]);
@@ -52,7 +52,7 @@ const OnboardingPage = () => {
 
       setSearchValue("");
     }
-    
+
   };
 
   useEffect(() => {
@@ -72,20 +72,14 @@ const OnboardingPage = () => {
   return (
     <div className="main">
       <section
-        className={`${'main__help'} ${isChatOpen ? 'open' : ""}`}
+        className={`main__help open `}
+        style={{ paddingTop: 0 }}
       >
         <div className={'main__help__wrapper'}>
-          {!isChatOpen && (
-            <>
-              <h1 className={'main__title'}>Добро пожаловать в команду АО «Транстелеком»! Используйте наш портал для быстрого доступа к информации и помощи.</h1>
-              <h2 className={'main__subtitle'}>Выберите тему ниже или задайте вопрос нашему чат-боту</h2>
-
-            </>
-          )}
           <Search
             handleSearchAction={handleSearch}
             msgs={msgs}
-            isChatOpen={isChatOpen}
+            isChatOpen={true}
             setIsChatOpenAction={setIsChatOpen}
             searchValue={searchValue}
             setSearchValueAction={setSearchValue}
@@ -98,4 +92,4 @@ const OnboardingPage = () => {
   );
 };
 
-export default OnboardingPage;
+export default OnboardingPage2;

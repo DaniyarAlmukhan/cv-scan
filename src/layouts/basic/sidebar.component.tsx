@@ -12,7 +12,7 @@ const Sidebar = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const isActiveRoute = (route: string) => location.pathname.includes(route) || location.pathname === '/app' && route === 'home';
+  const isActiveRoute = (route: string) => location.pathname.split('/').pop() === route || location.pathname === '/app' && route === 'home';
 
   return (
     <div className={`basicLayout__sidebar ${isOpen ? 'open' : ''}`}>
