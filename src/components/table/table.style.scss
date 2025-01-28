@@ -102,7 +102,8 @@
     display: inline-block;
     background-color: #ccc;
 
-    &.published {
+    &.published,
+    &.open {
       background-color: var(--color-green);
     }
 
