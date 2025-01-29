@@ -3,48 +3,9 @@ import Chat from "components/chat/chat.component";
 import { Search2, Send } from "assets";
 import './search.style.scss';
 import { SendIcon } from "lucide-react";
+import { getChartStart } from "requests/onboarding.request";
 
 type QuestionGroups = Record<string, string[]>;
-
-const questionGroups: QuestionGroups = {
-  "Ориентация в компании": [
-    "Каковы основные ценности компании?",
-    "Какие инструменты используются для внутреннего общения?",
-    "Каковы основные направления деятельности компании?",
-    "Как я могу получить доступ к корпоративным ресурсам?",
-    "Кто мои непосредственные руководители?"
-  ],
-  "Рабочее место": [
-    "Какие правила касаются личного пространства на работе?",
-    "Есть ли специальные требования к одежде?",
-    "Какие есть ограничения по использованию личных устройств?",
-    "Что делать, если мне нужны канцелярские принадлежности?"
-  ],
-  "Режим работы": [
-    "Какие часы работы установлены в компании?",
-    "Как контролируются часы прихода и ухода?",
-    "Что делать если я опоздаю на работу?",
-    "Как регулируются перерывы?"
-  ],
-  "Безопасность и здоровье": [
-    "Какие меры безопасности существуют на рабочем месте?",
-    "Что делать в случае аварии или пожара?",
-    "Какие требования к ношению медицинских масок?",
-    "К кому обращаться в случае травмы на работе?"
-  ],
-  "Оплата труда": [
-    "Как рассчитывается моя заработная плата?",
-    "Какие надбавки и бонусы предусмотрены?",
-    "Как происходит учет рабочего времени?",
-    "Как обсудить повышение зарплаты?"
-  ],
-  "Отпуск и больничный": [
-    "Какие правила по получению отпуска?",
-    "Как оформить больничный?",
-    "Есть ли компенсация за неиспользованный отпуск?",
-    "Как происходит расчет компенсации за больничные дни?"
-  ]
-};
 
 interface IProps {
   isChatOpen: boolean;
@@ -68,6 +29,7 @@ export default function Search({
   handleDeleteChatHistory
 }: IProps) {
   const [activeGroup, setActiveGroup] = useState<string | null>(null);
+  const [popularQuestions, setPopularQuestions] = useState<QuestionGroups>({});
   const buttonGroupRef = useRef<HTMLDivElement>(null);
 
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,6 +65,12 @@ export default function Search({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+  }, []);
+
+  useEffect(() => {
+    getChartStart().then((response) => {
+      setPopularQuestions(response.popular_questions);
+    });
   }, []);
 
   useEffect(() => {
@@ -146,7 +114,7 @@ export default function Search({
 
           <div className={`button-group ${activeGroup !== null ? 'active' : ""}`} ref={buttonGroupRef}>
             {activeGroup === null ? (
-              Object.keys(questionGroups).map((group) => (
+              Object.keys(popularQuestions).map((group) => (
                 <button
                   key={group}
                   type="button"
@@ -157,7 +125,7 @@ export default function Search({
                 </button>
               ))
             ) : (
-              questionGroups[activeGroup].map((question: string) => (
+              popularQuestions[activeGroup].map((question: string) => (
                 <button
                   key={question}
                   type="button"

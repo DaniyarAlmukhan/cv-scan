@@ -13,6 +13,9 @@ export interface IChatResponse {
 
 export interface IChartStartResponse {
   welcome_message: string;
+  popular_questions: {
+    string: string[]
+  }
 }
 
 const baseUrl = "http://91.185.21.250/api";
