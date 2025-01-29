@@ -24,3 +24,7 @@ export const getChatResponse = (question: string): Promise<IChatResponse> => {
 export const getChartStart = (): Promise<IChartStartResponse> => {
   return api.get(`/onboarding/start`);
 }
+
+export const deleteChatHistory = () => {
+  return api.post(`/onboarding/delete_chat_history`);
+}

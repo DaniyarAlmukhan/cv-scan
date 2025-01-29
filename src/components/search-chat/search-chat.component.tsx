@@ -54,6 +54,7 @@ interface IProps {
   msgs: any[];
   handleSearchAction: (msg: string, dropChatId?: boolean) => void;
   isLoading: boolean;
+  handleDeleteChatHistory: () => void;
 }
 
 export default function Search({
@@ -64,6 +65,7 @@ export default function Search({
   msgs,
   handleSearchAction,
   isLoading,
+  handleDeleteChatHistory
 }: IProps) {
   const [activeGroup, setActiveGroup] = useState<string | null>(null);
   const buttonGroupRef = useRef<HTMLDivElement>(null);
@@ -117,6 +119,7 @@ export default function Search({
           handleSendMessage={handleSearchAction}
           handleClose={closeChat}
           isLoading={isLoading}
+          handleDeleteChatHistory={handleDeleteChatHistory}
         />
       ) : (
         <>

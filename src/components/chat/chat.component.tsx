@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./chat.style.scss";
 import { BotAvatar, CloseIcon, CopyIcon } from "assets";
-import { SendIcon } from "lucide-react";
+import { RefreshCwIcon, SendIcon } from "lucide-react";
 import BotAvatarPerson from 'assets/icons/bot_avatar.jpg'
 
 interface IProps {
@@ -9,6 +9,7 @@ interface IProps {
   handleSendMessage: (message: string, clearChat?: boolean) => void;
   handleClose?: VoidFunction;
   isLoading?: boolean;
+  handleDeleteChatHistory: () => void;
 }
 
 const option2Questions = [
@@ -23,6 +24,7 @@ const Chat: React.FC<IProps> = ({
   handleSendMessage,
   handleClose,
   isLoading,
+  handleDeleteChatHistory
 }) => {
   const chatBodyRef = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState("");
@@ -152,6 +154,12 @@ const Chat: React.FC<IProps> = ({
         ))}
       </div>
       <div className={'full_chat__footer'}>
+        <div
+          className={'full_chat__send'}
+          onClick={() => !isLoading && handleDeleteChatHistory()}
+        >
+          <RefreshCwIcon />
+        </div>
         <input
           className={'full_chat__input'}
           value={query}

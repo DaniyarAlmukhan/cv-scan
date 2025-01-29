@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Search from "components/search-chat/search-chat.component";
 import './onboarding.style.scss';
-import {  getChatResponse } from "requests/onboarding.request";
+import { deleteChatHistory, getChatResponse } from "requests/onboarding.request";
 
 const OnboardingPage = () => {
   const [isChatOpen, setIsChatOpen] = React.useState<boolean>(false);
@@ -52,8 +52,15 @@ const OnboardingPage = () => {
 
       setSearchValue("");
     }
-    
+
   };
+
+  const handleDeleteChatHistory = () => {
+    deleteChatHistory()
+      .then(() => {
+        setMsgs([]);
+      });
+  }
 
   useEffect(() => {
     let storedChatId = localStorage.getItem("chat_id");
@@ -90,6 +97,7 @@ const OnboardingPage = () => {
             searchValue={searchValue}
             setSearchValueAction={setSearchValue}
             isLoading={isLoading}
+            handleDeleteChatHistory={handleDeleteChatHistory}
           />
         </div>
       </section>
