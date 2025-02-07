@@ -72,10 +72,17 @@ const CandidateTable: FC<TableProps> = ({ data, currentPage, rowsPerPage, setCur
                   <tr key={row.key}>
                     <td>{row.vacancy_name}</td>
                     <td>
-                      <div className="candidate-source">
-                        {sourceToIcon[row.platform]}
-                        {row.platform}
-                      </div> </td>
+                      {row.href
+                        ? <a className="candidate-source candidate-source-link" href={row.href} target="_blank" rel="noreferrer">
+                          {sourceToIcon[row.platform]}
+                          {row.platform}
+                        </a>
+                        : <div className="candidate-source">
+                          {sourceToIcon[row.platform]}
+                          {row.platform}
+                        </div>}
+
+                    </td>
                     <td>
                       <div>
                         {row.full_name}
